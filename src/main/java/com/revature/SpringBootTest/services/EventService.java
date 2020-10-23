@@ -18,23 +18,25 @@ public class EventService {
 	@Autowired
 	private EventDao eventDao;
 
-	private static String[] nums = {"one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty","twenty one","twenty two","twenty three","twenty four","twenty five","twenty six","twenty seven","twenty eight","twenty nine","thirty"};
+	private static String[] nums = {"zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty","twenty one","twenty two","twenty three","twenty four","twenty five","twenty six","twenty seven","twenty eight","twenty nine","thirty"};
 
 	public String timeInWords(int h, int m) {
 		if(m == 0){
-			return (nums[h-1] + " o' clock");
+			return (nums[h] + " o' clock");
 		} else if (m == 1){
-			return (nums[m-1] + " minute past " + nums[h-1]);
+			return (nums[m] + " minute past " + nums[h]);
 		} else if (m < 30 && m != 15){
-			return (nums[m-1] + " minutes past " + nums[h-1]);
+			return (nums[m] + " minutes past " + nums[h]);
 		} else if (m == 15){
-			return ("quarter past " + nums[h-1]);
+			return ("quarter past " + nums[h]);
 		} else if (m == 30){
-			return ("half past " + nums[h-1]);
+			return ("half past " + nums[h]);
+		} else if (m == 59){
+			return (nums[(30 - (m-30))] + " minute to " + nums[h+1]);
 		} else if (m != 45){
-			return (nums[(30 - (m-30))-1] + " minutes to " + nums[h]);
+			return (nums[(30 - (m-30))] + " minutes to " + nums[h+1]);
 		} else{
-			return ("quarter to " + nums[h]);
+			return ("quarter to " + nums[h+1]);
 		}
 	}
 
